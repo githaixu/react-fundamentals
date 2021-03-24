@@ -11,8 +11,10 @@
   <script type="text/babel">
     // 🐨 on the script tag above, change `type="module"`
     // to `type="text/babel"` so babel will compile this code for the browser to run.
-
-    <div className='container'>Hello World</div>
+    const className = 'container';
+    const children = 'Hello World';
+    const props = { className, children };
+    const element = <div {...props}></div>;
 
     // 💰 there are a few subtle differences between JSX and HTML. One such
     // difference is how you apply a class to an element in JSX is by using
