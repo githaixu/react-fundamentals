@@ -4,32 +4,30 @@
 import * as React from 'react'
 
 function UsernameForm({onSubmitUsername}) {
-  // 🐨 add a submit event handler here (`handleSubmit`).
-  // 💰 Make sure to accept the `event` as an argument and call
-  // `event.preventDefault()` to prevent the default behavior of form submit
-  // events (which refreshes the page)
+  const [ errorMessage, setError ] = React.useState('');
+  const [ btnDisabled, setBtnDisabled ] = React.useState(false);
+  const btnRef = React.useRef(null);
+
+  const handleChange = (event) => {
+    const value = event.target.value;
+    const isValieInput = value === value.toLowerCase();
+    setBtnDisabled(!isValieInput);
+    setError(isValieInput ? '' : 'Username must be lower case');
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(event.target.elements);
-    const inputValue = event.target.elements[0].value;
-    onSubmitUsername(inputValue);
+    onSubmitUsername(event.target.elements[0].value);
   }
-  // 🐨 get the value from the username input (using whichever method
-  // you prefer from the options mentioned in the instructions)
-  // 💰 For example: event.target.elements[0].value
-  // 🐨 Call `onSubmitUsername` with the value of the input
 
-  // 🐨 add the onSubmit handler to the <form> below
-
-  // 🐨 make sure to associate the label to the input.
-  // to do so, set the value of 'htmlFor' prop of the label to the id of input
   return (
     <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor='name'>Username:</label>
-        <input type="text" id='name' />
+        <input onChange={handleChange} type="text" id='name' />
       </div>
-      <button type="submit">Submit</button>
+      <button disabled={btnDisabled} ref={btnRef} type="submit">Submit</button>
+      <div>{errorMessage}</div>
     </form>
   )
 }
