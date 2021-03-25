@@ -7,13 +7,13 @@ function UsernameForm({onSubmitUsername}) {
   const [ username, setUsername ] = React.useState('');
 
   const handleChange = (event) => {
-    const value = event.target.value;
+    const {value} = event.target;
     setUsername(value.toLowerCase());
   }
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSubmitUsername(event.target.elements[0].value);
+    onSubmitUsername(username);
   }
 
   return (
