@@ -5,7 +5,7 @@ import {italic, red} from 'chalk'
 import * as React from 'react'
 import '../box-styles.css'
 
-function Box({children, size, style}) {
+function Box({children, size = 'small', style, ...otherProps}) {
   const classList = `box box--${size}`
   const mergedStyle = {
     fontStyle: 'italic',
@@ -13,7 +13,7 @@ function Box({children, size, style}) {
     ...style,
   }
   return (
-    <div className={classList} style={{...mergedStyle}}>
+    <div className={classList} style={{...mergedStyle}} {...otherProps}>
       {children}
     </div>
   )
